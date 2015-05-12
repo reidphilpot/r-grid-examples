@@ -5,6 +5,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/0.7.2/MinFaker.js"></script>
+    <script src="utils.js"></script>
     <script src="lib/r-grid.min.js"></script>
     <link rel="stylesheet" type="text/css" href="lib/r-grid.min.css">
   </head>
@@ -14,54 +15,9 @@
     <div class="example-01"></div>
 
     <script>
-      var data = d3.range(10000).map(fakeData)
-        , columns = [
-            {
-              id: 'name'
-            , field: 'name'
-            , label: 'Name'
-            , width: '175px'     
-            }
-          , {
-              id: 'streetAddress'
-            , field: 'streetAddress'
-            , label: 'Address'  
-            , width: '200px'       
-            }
-          , {
-              id: 'city'
-            , field: 'city'
-            , label: 'City'  
-            , width: '150px'       
-            }
-          , {
-              id: 'country'
-            , field: 'country'
-            , label: 'Country'  
-            , width: '150px'       
-            }
-          , {
-              id: 'zipCode'
-            , field: 'zipCode'
-            , label: 'Zip Code'  
-            , width: '150px'       
-            }
-          ]
-
       d3.select('.example-01')
-        .datum(data)
-        .call(createRGrid().columns(columns))
-
-      function fakeData(d, i) {
-        return {
-          id: i + 1
-        , name: Faker.Name.findName()
-        , streetAddress: Faker.Address.streetAddress()
-        , city: Faker.Address.city()
-        , zipCode: Faker.Address.zipCode()
-        , country: Faker.Address.ukCountry()
-        }
-      }
+        .datum(d3.range(10000).map(fakeData))
+        .call(createRGrid().columns(createColumns()));
     </script>
   </body>
 </html>
